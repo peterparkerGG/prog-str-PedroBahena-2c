@@ -17,6 +17,6 @@ public class Main {
         return acumulador;
     }
     public static String mensaje() {
-        return "La suma total es de: ";
+        return "La suma total es: ";
     }
 }
