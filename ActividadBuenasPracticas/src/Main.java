@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner leer = new Scanner(System.in);
 
-        System.out.println("Ingresa un numero:");
+        System.out.println("Ingrese un numero:");
         int num1 = leer.nextInt();
         int resultado = sumadenumeros(num1);
         System.out.println(mensaje() + ":" + resultado);
