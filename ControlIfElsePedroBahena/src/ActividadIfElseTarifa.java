@@ -32,7 +32,7 @@ public class ActividadIfElseTarifa {
             }
         }
         System.out.println("Edad ingresada: " + edad);
-        System.out.println("Es estudiante?: " + esEstudiante);
-        System.out.println("Tarifa final:$" + tarifa);
+        System.out.println("¿Es estudiante?: " + esEstudiante);
+        System.out.println("Tarifa final:" + tarifa);
     }
 }
