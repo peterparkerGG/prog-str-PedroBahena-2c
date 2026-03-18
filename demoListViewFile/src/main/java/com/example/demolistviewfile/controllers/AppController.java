@@ -17,10 +17,16 @@ public class AppController {
     private Label lblMsg;
     @FXML
     private ListView<String> listView;
+
     @FXML
-    private TextField txtName;
+    private TextField txtNombre;
     @FXML
     private TextField txtEmail;
+    @FXML
+    private TextField txtedad;
+    @FXML
+    private Label lblMsge;
+
 
     private ObservableList<String> data = FXCollections.observableArrayList();
     PersonService service= new PersonService();
@@ -28,6 +34,18 @@ public class AppController {
     @FXML
     public void initialize(){
         listView.setItems(data);
+        listView.getSelectionModel().selectedItemProperty().addListener(
+                (obs,oldValue,newValue) ->{
+                    if(newValue!=null){
+                        String[] parts= newValue.split(" - ");
+                        txtNombre.setText(parts[0]);
+                        txtEmail.setText(parts[1]);
+                        txtedad.setText(parts[2]);
+                    }
+
+
+                }
+        );
         loadFromFile();
     }
 
@@ -36,47 +54,69 @@ public class AppController {
         loadFromFile();
     }
 
-    {
-
-    }
-    @FXML
-    private TextField txtAge; // Añadir esta línea con los otros @FXML
-
     @FXML
     public void onAddPerson() {
         try {
-            String name = txtName.getText();
+            String edadt = txtedad.getText();
+            String name = txtNombre.getText();
             String email = txtEmail.getText();
-
-
-            int age = Integer.parseInt(txtAge.getText());
-
-
-            service.addPerson(name, email, age);
-
-            lblMsg.setText("Usuario ingresado correctamente");
+            service.addPerson(name, email, edadt);
+            lblMsg.setText("Usuario Creado correctamente");
             lblMsg.setStyle("-fx-text-fill: green");
-
-
-            txtName.clear();
+            txtNombre.clear();
             txtEmail.clear();
-            txtAge.clear();
+            txtedad.clear();
             loadFromFile();
-
-        } catch (NumberFormatException e) {
-
-            lblMsg.setText("Error: La edad debe ser un número");
+        } catch (IOException e) {
+            lblMsg.setText("Error de archivo" + e.getMessage());
             lblMsg.setStyle("-fx-text-fill: red");
         } catch (IllegalArgumentException e) {
-
-            lblMsg.setText(e.getMessage());
-            lblMsg.setStyle("-fx-text-fill: red");
-        } catch (IOException e) {
-            lblMsg.setText("Error de archivo: " + e.getMessage());
+            lblMsg.setText("Error de datos" + e.getMessage());
             lblMsg.setStyle("-fx-text-fill: red");
         }
     }
+    @FXML
+    public void onUpdate(){
+        try {
+            int index = listView.getSelectionModel().getSelectedIndex();
+            String age = txtedad.getText();
+            String name = txtNombre.getText();
+            String email = txtEmail.getText();
 
+            service.updatePerson(index, name, email, age);
+            loadFromFile();
+            txtNombre.clear();
+            txtEmail.clear();
+            txtedad.clear();
+            lblMsg.setText("Se actualizo el registro correctame");
+            lblMsg.setStyle("-fx-text-fill: green");
+        } catch (IOException e) {
+            lblMsg.setText("Hubo un error con el archivo");
+            lblMsg.setStyle("-fx-text-fill: red");
+        } catch (IllegalArgumentException e) {
+            lblMsg.setText("Hubo un error con con los datos"+e.getMessage());
+            lblMsg.setStyle("-fx-text-fill: red");
+        }
+    }
+    @FXML
+    public void onDelete(){
+        try {
+        int index = listView.getSelectionModel().getSelectedIndex();
+        service.delete(index);
+        loadFromFile();
+        txtNombre.clear();
+        txtEmail.clear();
+        txtedad.clear();
+        lblMsg.setText("Se elimino  el registro correctame");
+        lblMsg.setStyle("-fx-text-fill: green");
+    } catch (IOException e) {
+        lblMsg.setText("Hubo un error con el archivo");
+        lblMsg.setStyle("-fx-text-fill: red");
+    } catch (IllegalArgumentException e) {
+        lblMsg.setText("Hubo un error con con los datos"+e.getMessage());
+        lblMsg.setStyle("-fx-text-fill: red");
+    }
+    }
     private void loadFromFile(){
         try{
             List<String> items = service.loadForListView();

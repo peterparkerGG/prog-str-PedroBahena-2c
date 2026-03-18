@@ -6,29 +6,38 @@
 <VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demolistviewfile.controllers.AppController">
    <children>
       <Label text="Listado de usuarios desde archivo" />
-       <GridPane>
-           <columnConstraints>
-               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-           </columnConstraints>
-           <rowConstraints>
-               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" /> </rowConstraints>
-           <children>
-               <Label text="Nombre" />
-               <Label text="Email" GridPane.rowIndex="1" />
-               <Label text="Edad" GridPane.rowIndex="2" /> <TextField fx:id="txtName" GridPane.columnIndex="1" />
-               <TextField fx:id="txtEmail" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-               <TextField fx:id="txtAge" GridPane.columnIndex="1" GridPane.rowIndex="2" /> </children>
-       </GridPane>
-       <HBox prefHeight="100.0" prefWidth="200.0">
-           <children>
-               <Button mnemonicParsing="false" onAction="#onReload" text="Recargar info" />
-               <Button mnemonicParsing="false" onAction="#onAddPerson" text="Agregar" />
-           </children>
-       </HBox>
+      <GridPane>
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints />
+        </rowConstraints>
+         <children>
+            <Label text="Nombre" />
+            <Label text="Email" GridPane.rowIndex="1" />
+             <Label text="Edad" GridPane.rowIndex="2" />
+
+            <TextField fx:id="txtNombre" GridPane.columnIndex="1" />
+            <TextField fx:id="txtEmail" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+             <TextField fx:id="txtedad" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+         </children>
+      </GridPane>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#onReload" text="Recargar info" />
+            <Button mnemonicParsing="false" onAction="#onAddPerson" text="Agregar" />
+             <Button mnemonicParsing="false"  onAction="#onUpdate" text="Actualizar" />
+             <Button mnemonicParsing="false"  onAction="#onDelete" text="Eliminar" />
+         </children>
+      </HBox>
       <ListView fx:id="listView" prefHeight="200.0" prefWidth="200.0" />
       <Label fx:id="lblMsg" />
+       <Label fx:id="lblMsge"/>
    </children>
 </VBox>
