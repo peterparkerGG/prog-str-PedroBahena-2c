@@ -1,0 +1,27 @@
+package com.example.examencontactos;
+
+public class Contacto {
+    private String nombre;
+    private String telefono;
+    private String parentesco;
+
+    public Contacto(String nombre, String telefono, String parentesco) {
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.parentesco = parentesco;
+    }
+
+    // Getters y Setters
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+    public String getTelefono() { return telefono; }
+    public void setTelefono(String telefono) { this.telefono = telefono; }
+    public String getParentesco() { return parentesco; }
+    public void setParentesco(String parentesco) { this.parentesco = parentesco; }
+
+    // El método toString define cómo se verá el contacto en el ListView
+    @Override
+    public String toString() {
+        return nombre + " (" + parentesco + ") - Tel: " + telefono;
+    }
+}
